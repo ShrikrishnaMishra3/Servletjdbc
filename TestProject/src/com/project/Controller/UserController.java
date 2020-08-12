@@ -10,19 +10,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.project.dao.Kit_Dao;
+import com.project.dao.KitDao;
 import com.project.models.kitModels;
 
-public class ControllerServlet extends HttpServlet {
+public class UserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Kit_Dao kitDAO;
+	private KitDao kitDAO;
 
 	public void init() {
 		String jdbcURL = getServletContext().getInitParameter("jdbcURL");
 		String jdbcUsername = getServletContext().getInitParameter("jdbcUsername");
 		String jdbcPassword = getServletContext().getInitParameter("jdbcPassword");
-
-		kitDAO = new Kit_Dao(jdbcURL, jdbcUsername, jdbcPassword);
+		System.out.println(jdbcURL + jdbcUsername + jdbcPassword);
+		kitDAO = new KitDao(jdbcURL, jdbcUsername, jdbcPassword);
 
 	}
 
@@ -33,23 +33,23 @@ public class ControllerServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String action = request.getServletPath();
-
+		String action = request.getParameter("action");
+		System.out.println("ACTION : " + action);
 		try {
 			switch (action) {
-			case "/new":
+			case "new":
 				showNewForm(request, response);
 				break;
-			case "/insert":
+			case "insert":
 				insertKit(request, response);
 				break;
-			case "/delete":
+			case "delete":
 				deleteKit(request, response);
 				break;
-			case "/edit":
+			case "edit":
 				showEditForm(request, response);
 				break;
-			case "/update":
+			case "update":
 				updateKit(request, response);
 				break;
 			default:
@@ -94,7 +94,7 @@ public class ControllerServlet extends HttpServlet {
 		String OrderDate = request.getParameter("OrderDate");
 		
 
-		kitModels newkit = new kitModels(PersonName, Email, ContactNumber,Status,OrderDate);
+		kitModels newkit = new kitModels(0,PersonName, Email, ContactNumber,Status,OrderDate);
 		kitDAO.insertkiT(newkit);
 		response.sendRedirect("list");
 	}
@@ -108,7 +108,7 @@ public class ControllerServlet extends HttpServlet {
 		String OrderDate = request.getParameter("OrderDate");
 	
 
-		kitModels kites = new kitModels(PersonName, Email, ContactNumber,Status,OrderDate);
+		kitModels kites = new kitModels(id,PersonName, Email, ContactNumber,Status,OrderDate);
 		kitDAO.updateKit(kites);
 		response.sendRedirect("list");
 	}
@@ -116,8 +116,8 @@ public class ControllerServlet extends HttpServlet {
 	private void deleteKit(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 
-		kitModels kites = new kitModels(id);
-		kitDAO.deleteKit(kites);
+		
+		kitDAO.deleteKit(id);
 		response.sendRedirect("list");
 
 	}

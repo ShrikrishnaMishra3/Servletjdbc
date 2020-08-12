@@ -15,10 +15,10 @@ import com.project.dao.ProductMasterDao;
 import com.project.models.ProductMaster;
 
 
-public class ProjectMasterController extends HttpServlet {
+public class AdminController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ProductMasterDao productMasterDao;
-
+	
 	public void init() {
 		String jdbcURL = getServletContext().getInitParameter("jdbcURL");
 		String jdbcUsername = getServletContext().getInitParameter("jdbcUsername");
@@ -35,23 +35,23 @@ public class ProjectMasterController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String action = request.getServletPath();
+		String action =  request.getParameter("action");
 
 		try {
 			switch (action) {
-			case "/newProduct":
+			case "newProduct":
 				showNewForm(request, response);
 				break;
-			case "/insertProduct":
+			case "insertProduct":
 				insertProduct(request, response);
 				break;
-			case "/deleteProduct":
+			case "deleteProduct":
 				deleteProject(request, response);
 				break;
-			case "/editProduct":
+			case "editProduct":
 				showEditForm(request, response);
 				break;
-			case "/updateProduct":
+			case "updateProduct":
 				updateProject(request, response);
 				break;
 			default:
@@ -65,7 +65,7 @@ public class ProjectMasterController extends HttpServlet {
 
 	private void listProject(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
-		List<ProductMaster> listProductMaster = ProductMasterDao.listAllProductinfo();
+		List<ProductMaster> listProductMaster = productMasterDao.listAllProductinfo();
 		request.setAttribute("listProductMaster", listProductMaster);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("ProductMasterList.jsp");
 		dispatcher.forward(request, response);
@@ -95,7 +95,7 @@ public class ProjectMasterController extends HttpServlet {
 
 		
 
-		ProductMaster productMaster = new ProductMaster(ProductName, Cost, ProductDescription);
+		ProductMaster productMaster = new ProductMaster(0,ProductName, Cost, ProductDescription);
 		productMasterDao.insertPrduct(productMaster);
 		response.sendRedirect("list");
 	}
@@ -107,16 +107,14 @@ public class ProjectMasterController extends HttpServlet {
 		String ProductDescription = request.getParameter("ProductDescription");
 	
 
-		ProductMaster productMaster = new ProductMaster(ProductName, Cost, ProductDescription);
+		ProductMaster productMaster = new ProductMaster(0,ProductName, Cost, ProductDescription);
 		productMasterDao.updateProduct(productMaster);
 		response.sendRedirect("list");
 	}
 
 	private void deleteProject(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-
-		ProductMaster productMaster = new ProductMaster(id);
-		productMasterDao.deleteProduct(productMaster);
+		productMasterDao.deleteProduct(id);
 		response.sendRedirect("list");
 
 	}

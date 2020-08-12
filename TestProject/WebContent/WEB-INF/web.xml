@@ -5,7 +5,9 @@
         http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
     id="WebApp_ID" version="3.1">
     <display-name>CoranaKit Management Web Application</display-name>
- 
+ <welcome-file-list>
+ <welcome-file>Index.jsp</welcome-file>
+ </welcome-file-list>
     <context-param>
         <param-name>jdbcURL</param-name>
         <param-value>jdbc:mysql://localhost:3306/Corana_Kit</param-value>

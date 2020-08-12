@@ -3,22 +3,23 @@ package com.project.models;
 public class kitModels {
 	
 	private int id;
-	private String PersonName;
-	private String Email;
-	private String ContactNumber;
-	public kitModels(int id2, String personName2, String email2, String contactNumber2, String status2, String orderDate2) {
-		
-	}
-	public kitModels(String personName2, String email2, String contactNumber2, String status2, String orderDate2) {
-		// TODO Auto-generated constructor stub
-	}
-	public kitModels(int id2) {
-		// TODO Auto-generated constructor stub
-	}
-	@Override
-	public String toString() {
-		return "kITModels [id=" + id + ", PersonName=" + PersonName + ", Email=" + Email + ", ContactNumber="
-				+ ContactNumber + ", Status=" + Status + ", OrderDate=" + OrderDate + "]";
+	private String personName;
+	private String email;
+	private String contactNumber;
+	private String status;
+	private String orderDate;
+	
+	
+	
+	
+	public kitModels(int id, String personName, String email, String contactNumber, String status, String orderDate) {
+		super();
+		this.id = id;
+		this.personName = personName;
+		this.email = email;
+		this.contactNumber = contactNumber;
+		this.status = status;
+		this.orderDate = orderDate;
 	}
 	public int getId() {
 		return id;
@@ -27,36 +28,37 @@ public class kitModels {
 		this.id = id;
 	}
 	public String getPersonName() {
-		return PersonName;
+		return personName;
 	}
 	public void setPersonName(String personName) {
-		PersonName = personName;
+		this.personName = personName;
 	}
 	public String getEmail() {
-		return Email;
+		return email;
 	}
 	public void setEmail(String email) {
-		Email = email;
+		this.email = email;
 	}
 	public String getContactNumber() {
-		return ContactNumber;
+		return contactNumber;
 	}
 	public void setContactNumber(String contactNumber) {
-		ContactNumber = contactNumber;
+		this.contactNumber = contactNumber;
 	}
 	public String getStatus() {
-		return Status;
+		return status;
 	}
 	public void setStatus(String status) {
-		Status = status;
+		this.status = status;
 	}
 	public String getOrderDate() {
-		return OrderDate;
+		return orderDate;
 	}
 	public void setOrderDate(String orderDate) {
-		OrderDate = orderDate;
+		this.orderDate = orderDate;
 	}
-	private String Status;
-	private String OrderDate;
+	
+	
+	
 
 }

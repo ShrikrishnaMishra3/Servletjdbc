@@ -9,9 +9,9 @@
     <center>
         <h1>Kit Management</h1>
         <h2>
-            <a href="/new">Add New Kit</a>
+            <a href="kit?action=new">Add New Kit</a>
             &nbsp;&nbsp;&nbsp;
-            <a href="/list">List All Kit</a>
+            <a href="list">List All Kit</a>
              
         </h2>
     </center>
@@ -27,18 +27,18 @@
                   <th>OrderDate</th>
                 <th>Actions</th>
             </tr>
-            <c:forEach var="Kit" items="${listKit}">
+            <c:forEach var="kit?action=kit" items="${listKit}">
                 <tr>
                     <td><c:out value="${kit.id}" /></td>
-                    <td><c:out value="${kit.PersonName}" /></td>
-                    <td><c:out value="${kit.Email}" /></td>
-                    <td><c:out value="${kit.ContactNumber}" /></td>
-                    <td><c:out value="${kit.Status}" /></td>
-                    <td><c:out value="${kit.OrderDate}" /></td>
+                    <td><c:out value="${kit.personName}" /></td>
+                    <td><c:out value="${kit.email}" /></td>
+                    <td><c:out value="${kit.contactNumber}" /></td>
+                    <td><c:out value="${kit.status}" /></td>
+                    <td><c:out value="${kit.orderDate}" /></td>
                     <td>
-                        <a href="/edit?id=<c:out value='${kit.id}' />">Edit</a>
+                        <a href="kit?action=edit?id=<c:out value='${kit.id}' />">Edit</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="/delete?id=<c:out value='${kit.id}' />">Delete</a>                     
+                        <a href="kit?action=delete?id=<c:out value='${kit.id}' />">Delete</a>                     
                     </td>
                 </tr>
             </c:forEach>

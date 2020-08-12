@@ -11,14 +11,14 @@ import java.util.List;
 
 import com.project.models.kitModels;
 
-public class Kit_Dao {
+public class KitDao {
 
 	private String jdbcURL;
 	private String jdbcUsername;
 	private String jdbcPassword;
 	private Connection jdbcConnection;
 
-	public Kit_Dao(String jdbcURL, String jdbcUsername, String jdbcPassword) {
+	public KitDao(String jdbcURL, String jdbcUsername, String jdbcPassword) {
         this.jdbcURL = jdbcURL;
         this.jdbcUsername = jdbcUsername;
         this.jdbcPassword = jdbcPassword;
@@ -76,7 +76,8 @@ public class Kit_Dao {
 			String Status = resultSet.getString("Status");
 			String OrderDate = resultSet.getString("OrderDate");
 
-			kitModels Models = new kitModels(id,PersonName,Email,ContactNumber,Status,OrderDate); 
+			kitModels Models = new kitModels(id,PersonName,Email,ContactNumber,Status,OrderDate);
+			System.out.println(Models);
 			listkitModels.add(Models);
 		}
 
@@ -88,13 +89,13 @@ public class Kit_Dao {
 		return listkitModels;
 	}
 
-	public boolean deleteKit(kitModels models) throws SQLException {
+	public boolean deleteKit(int id) throws SQLException {
 		String sql = "DELETE FROM Kit where id = ?";
 
 		connect();
 
 		PreparedStatement statement = jdbcConnection.prepareStatement(sql);
-		statement.setInt(1, models.getId());
+		statement.setInt(1, id);
 
 		boolean rowDeleted = statement.executeUpdate() > 0;
 		statement.close();

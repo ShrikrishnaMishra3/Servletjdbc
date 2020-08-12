@@ -73,7 +73,7 @@ public class ProductMasterDao {
 			String Cost = resultSet.getString("Cost");
 			String ProductDescription = resultSet.getString("ProductDescription");
 			
-			ProductMaster Models = new ProductMaster(ProductName,Cost,ProductDescription); 
+			ProductMaster Models = new ProductMaster(id,ProductName,Cost,ProductDescription); 
 			listProductMaster.add(Models);
 		}
 
@@ -85,18 +85,19 @@ public class ProductMasterDao {
 		return listProductMaster;
 	}
 
-	public boolean deleteProduct(ProductMaster models) throws SQLException {
+	public boolean deleteProduct(int id) throws SQLException {
 		String sql = "DELETE FROM ProductMaster where id = ?";
 
 		connect();
 
 		PreparedStatement statement = jdbcConnection.prepareStatement(sql);
-		statement.setInt(1, models.getId());
+		statement.setInt(1, id);
 
 		boolean rowDeleted = statement.executeUpdate() > 0;
 		statement.close();
 		disconnect();
 		return rowDeleted;
+
 	}
 
 	public boolean updateProduct(ProductMaster models) throws SQLException {
@@ -132,7 +133,7 @@ public class ProductMasterDao {
 			String Cost = resultSet.getString("Cost");
 			String ProductDescription = resultSet.getString("ProductDescription");
 
-			details = new ProductMaster(ProductName,Cost,ProductDescription);
+			details = new ProductMaster(id,ProductName,Cost,ProductDescription);
 		}
 
 		resultSet.close();
