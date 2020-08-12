@@ -9,17 +9,16 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.project.models.ProductMaster;
 import com.project.models.kITModels;
 
-public class ProductMasterDao {
+public class KIt_Dao {
 
 	private String jdbcURL;
 	private String jdbcUsername;
 	private String jdbcPassword;
 	private Connection jdbcConnection;
 
-	public ProductMasterDao(String jdbcURL, String jdbcUsername, String jdbcPassword) {
+	public KIt_Dao(String jdbcURL, String jdbcUsername, String jdbcPassword) {
         this.jdbcURL = jdbcURL;
         this.jdbcUsername = jdbcUsername;
         this.jdbcPassword = jdbcPassword;
@@ -42,25 +41,27 @@ public class ProductMasterDao {
 		}
 	}
 
-	public boolean insertPrduct(ProductMaster productMaster) throws SQLException {
-		String sql = "INSERT INTO ProductMaster(ProductName,Cost,ProductDescription) VALUES (?,?,?)";
+	public boolean insertkIT(kITModels kITModels) throws SQLException {
+		String sql = "INSERT INTO Kit(PersonName,Email,ContactNumber,Status,OrderDate) VALUES (?,?,?,?,?)";
 		connect();
 
 		PreparedStatement statement = jdbcConnection.prepareStatement(sql);
-		statement.setString(1, productMaster.getProductName());
-		statement.setString(2, productMaster.getCost());
-		statement.setString(3, productMaster.getProductDescription());
-	
+		statement.setString(1, kITModels.getPersonName());
+		statement.setString(2, kITModels.getEmail());
+		statement.setString(3, kITModels.getContactNumber());
+		statement.setString(4, kITModels.getStatus());
+		statement.setString(5, kITModels.getOrderDate());
+
 		boolean rowInserted = statement.executeUpdate() > 0;
 		statement.close();
 		disconnect();
 		return rowInserted;
 	}
 
-	public List<ProductMaster> listAllProductinfo() throws SQLException {
-		List<ProductMaster> listProductMaster= new ArrayList<>();
+	public List<kITModels> listAllkITModelsinfo() throws SQLException {
+		List<kITModels> listkITModels = new ArrayList<>();
 
-		String sql = "SELECT * FROM ProductMaster";
+		String sql = "SELECT * FROM Kit";
 
 		connect();
 
@@ -69,12 +70,14 @@ public class ProductMasterDao {
 		
 		while (resultSet.next()) {
 			int id = resultSet.getInt("id");
-			String ProductName = resultSet.getString("ProductName");
-			String Cost = resultSet.getString("Cost");
-			String ProductDescription = resultSet.getString("ProductDescription");
-			
-			ProductMaster Models = new ProductMaster(id,ProductName,Cost,ProductDescription); 
-			listProductMaster.add(Models);
+			String PersonName = resultSet.getString("PersonName");
+			String Email = resultSet.getString("Email");
+			String ContactNumber = resultSet.getString("ContactNumber");
+			String Status = resultSet.getString("Status");
+			String OrderDate = resultSet.getString("OrderDate");
+
+			kITModels Models = new kITModels(id,PersonName,Email,ContactNumber,Status,OrderDate); 
+			listkITModels.add(Models);
 		}
 
 		resultSet.close();
@@ -82,11 +85,11 @@ public class ProductMasterDao {
 
 		disconnect();
 
-		return listProductMaster;
+		return listkITModels;
 	}
 
-	public boolean deleteProduct(ProductMaster models) throws SQLException {
-		String sql = "DELETE FROM ProductMaster where id = ?";
+	public boolean deleteKit(kITModels models) throws SQLException {
+		String sql = "DELETE FROM Kit where id = ?";
 
 		connect();
 
@@ -99,26 +102,28 @@ public class ProductMasterDao {
 		return rowDeleted;
 	}
 
-	public boolean updateProduct(ProductMaster models) throws SQLException {
-		String sql = "UPDATE ProductMaster SET ProductName = ? ,Cost = ?,ProductDescription = ?";
+	public boolean updateKit(kITModels models) throws SQLException {
+		String sql = "UPDATE Kit SET PersonName = ? ,Email = ?,ContactNumber = ?,Status=?,OrderDate=?";
 		sql += " WHERE id = ?";
 		connect();
 
 		PreparedStatement statement = jdbcConnection.prepareStatement(sql);
-		statement.setString(1, models.getProductName());
-		statement.setString(2, models.getCost());
-		statement.setString(3, models.getProductDescription());
+		statement.setString(1, models.getPersonName());
+		statement.setString(2, models.getEmail());
+		statement.setString(3, models.getContactNumber());
+		statement.setString(4, models.getStatus());
+		statement.setString(5, models.getOrderDate());
 		statement.setInt(6, models.getId());
-		
+
 		boolean rowUpdated = statement.executeUpdate() > 0;
 		statement.close();
 		disconnect();
 		return rowUpdated;
 	}
 
-	public ProductMaster getProduct(int id) throws SQLException {
-		ProductMaster details = null;
-		String sql = "SELECT * FROM ProductMaster WHERE id = ?";
+	public kITModels getBook(int id) throws SQLException {
+		kITModels details = null;
+		String sql = "SELECT * FROM book WHERE book_id = ?";
 
 		connect();
 
@@ -128,11 +133,13 @@ public class ProductMasterDao {
 		ResultSet resultSet = statement.executeQuery();
 
 		if (resultSet.next()) {
-			String ProductName = resultSet.getString("ProductName");
-			String Cost = resultSet.getString("Cost");
-			String ProductDescription = resultSet.getString("ProductDescription");
+			String PersonName = resultSet.getString("PersonName");
+			String Email = resultSet.getString("Email");
+			String ContactNumber = resultSet.getString("ContactNumber");
+			String Status = resultSet.getString("Status");
+			String OrderDate = resultSet.getString("OrderDate");
 
-			details = new ProductMaster(id,ProductName,Cost,ProductDescription);
+			details = new kITModels(id,PersonName,Email,ContactNumber,Status,OrderDate);
 		}
 
 		resultSet.close();
