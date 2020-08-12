@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.project.models.ProductMaster;
-import com.project.models.kITModels;
+import com.project.models.kitModels;
 
 public class ProductMasterDao {
 
@@ -73,7 +73,7 @@ public class ProductMasterDao {
 			String Cost = resultSet.getString("Cost");
 			String ProductDescription = resultSet.getString("ProductDescription");
 			
-			ProductMaster Models = new ProductMaster(id,ProductName,Cost,ProductDescription); 
+			ProductMaster Models = new ProductMaster(ProductName,Cost,ProductDescription); 
 			listProductMaster.add(Models);
 		}
 
@@ -132,7 +132,7 @@ public class ProductMasterDao {
 			String Cost = resultSet.getString("Cost");
 			String ProductDescription = resultSet.getString("ProductDescription");
 
-			details = new ProductMaster(id,ProductName,Cost,ProductDescription);
+			details = new ProductMaster(ProductName,Cost,ProductDescription);
 		}
 
 		resultSet.close();

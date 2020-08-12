@@ -39,19 +39,19 @@ public class ProjectMasterController extends HttpServlet {
 
 		try {
 			switch (action) {
-			case "/new":
+			case "/newProduct":
 				showNewForm(request, response);
 				break;
-			case "/insert":
+			case "/insertProduct":
 				insertProduct(request, response);
 				break;
-			case "/delete":
+			case "/deleteProduct":
 				deleteProject(request, response);
 				break;
-			case "/edit":
+			case "/editProduct":
 				showEditForm(request, response);
 				break;
-			case "/update":
+			case "/updateProduct":
 				updateProject(request, response);
 				break;
 			default:
@@ -65,7 +65,7 @@ public class ProjectMasterController extends HttpServlet {
 
 	private void listProject(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
-		List<ProductMaster> listProductMaster = ProductMasterDao.listAllkIModelsinfo();
+		List<ProductMaster> listProductMaster = ProductMasterDao.listAllProductinfo();
 		request.setAttribute("listProductMaster", listProductMaster);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("ProductMasterList.jsp");
 		dispatcher.forward(request, response);
@@ -80,9 +80,9 @@ public class ProjectMasterController extends HttpServlet {
 	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        ProductMaster existingKit = productMasterDao.getBook(id);
+        ProductMaster existingProduct = productMasterDao.getProduct(id);
         RequestDispatcher dispatcher = request.getRequestDispatcher("ProductMasterForm.jsp");
-        request.setAttribute("kit", existingKit);
+        request.setAttribute("ProductMaster", existingProduct);
         dispatcher.forward(request, response);
  
     }
@@ -107,7 +107,7 @@ public class ProjectMasterController extends HttpServlet {
 		String ProductDescription = request.getParameter("ProductDescription");
 	
 
-		ProductMaster productMaster = new ProductMaster(id,ProductName, Cost, ProductDescription);
+		ProductMaster productMaster = new ProductMaster(ProductName, Cost, ProductDescription);
 		productMasterDao.updateProduct(productMaster);
 		response.sendRedirect("list");
 	}

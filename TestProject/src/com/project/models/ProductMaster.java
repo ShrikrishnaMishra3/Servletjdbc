@@ -20,11 +20,15 @@ public class ProductMaster {
 	private String Cost;
 	private String ProductDescription;
 
-	public ProductMaster(int id, String ProductName, String Cost, String ProductDescription) {
+	public ProductMaster(String ProductName, String Cost, String ProductDescription) {
 		this.id = id;
 		this.ProductName = ProductName;
 		this.Cost = Cost;
 		this.ProductDescription = ProductDescription;
+	}
+
+	public ProductMaster(int id2) {
+		// TODO Auto-generated constructor stub
 	}
 
 	public String getProductName() {
@@ -53,6 +57,17 @@ public class ProductMaster {
 
 	public void setId(int id) {
 		this.id = id;
+	
 	}
 
-}
+	public int getId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	
+	}
+
+	
+
+

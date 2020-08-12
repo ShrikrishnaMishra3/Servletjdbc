@@ -28,7 +28,16 @@
  
     <servlet-mapping>
         <servlet-name>ControllerServlet</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/kit</url-pattern>
+    </servlet-mapping>
+     <servlet>
+        <servlet-name>ProjectMasterController</servlet-name>
+        <servlet-class>com.project.Controller.ProjectMasterController</servlet-class>
+    </servlet>
+ 
+    <servlet-mapping>
+        <servlet-name>ProjectMasterController</servlet-name>
+        <url-pattern>/product</url-pattern>
     </servlet-mapping>
  
     <error-page>

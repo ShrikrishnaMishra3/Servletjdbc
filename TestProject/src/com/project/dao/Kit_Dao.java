@@ -9,16 +9,16 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.project.models.kITModels;
+import com.project.models.kitModels;
 
-public class KIt_Dao {
+public class Kit_Dao {
 
 	private String jdbcURL;
 	private String jdbcUsername;
 	private String jdbcPassword;
 	private Connection jdbcConnection;
 
-	public KIt_Dao(String jdbcURL, String jdbcUsername, String jdbcPassword) {
+	public Kit_Dao(String jdbcURL, String jdbcUsername, String jdbcPassword) {
         this.jdbcURL = jdbcURL;
         this.jdbcUsername = jdbcUsername;
         this.jdbcPassword = jdbcPassword;
@@ -41,7 +41,7 @@ public class KIt_Dao {
 		}
 	}
 
-	public boolean insertkIT(kITModels kITModels) throws SQLException {
+	public boolean insertkiT(kitModels kITModels) throws SQLException {
 		String sql = "INSERT INTO Kit(PersonName,Email,ContactNumber,Status,OrderDate) VALUES (?,?,?,?,?)";
 		connect();
 
@@ -58,8 +58,8 @@ public class KIt_Dao {
 		return rowInserted;
 	}
 
-	public List<kITModels> listAllkITModelsinfo() throws SQLException {
-		List<kITModels> listkITModels = new ArrayList<>();
+	public List<kitModels> listAllkitModelsinfo() throws SQLException {
+		List<kitModels> listkitModels = new ArrayList<>();
 
 		String sql = "SELECT * FROM Kit";
 
@@ -76,8 +76,8 @@ public class KIt_Dao {
 			String Status = resultSet.getString("Status");
 			String OrderDate = resultSet.getString("OrderDate");
 
-			kITModels Models = new kITModels(id,PersonName,Email,ContactNumber,Status,OrderDate); 
-			listkITModels.add(Models);
+			kitModels Models = new kitModels(id,PersonName,Email,ContactNumber,Status,OrderDate); 
+			listkitModels.add(Models);
 		}
 
 		resultSet.close();
@@ -85,10 +85,10 @@ public class KIt_Dao {
 
 		disconnect();
 
-		return listkITModels;
+		return listkitModels;
 	}
 
-	public boolean deleteKit(kITModels models) throws SQLException {
+	public boolean deleteKit(kitModels models) throws SQLException {
 		String sql = "DELETE FROM Kit where id = ?";
 
 		connect();
@@ -102,7 +102,7 @@ public class KIt_Dao {
 		return rowDeleted;
 	}
 
-	public boolean updateKit(kITModels models) throws SQLException {
+	public boolean updateKit(kitModels models) throws SQLException {
 		String sql = "UPDATE Kit SET PersonName = ? ,Email = ?,ContactNumber = ?,Status=?,OrderDate=?";
 		sql += " WHERE id = ?";
 		connect();
@@ -121,8 +121,8 @@ public class KIt_Dao {
 		return rowUpdated;
 	}
 
-	public kITModels getBook(int id) throws SQLException {
-		kITModels details = null;
+	public kitModels getBook(int id) throws SQLException {
+		kitModels details = null;
 		String sql = "SELECT * FROM book WHERE book_id = ?";
 
 		connect();
@@ -139,7 +139,7 @@ public class KIt_Dao {
 			String Status = resultSet.getString("Status");
 			String OrderDate = resultSet.getString("OrderDate");
 
-			details = new kITModels(id,PersonName,Email,ContactNumber,Status,OrderDate);
+			details = new kitModels(id,PersonName,Email,ContactNumber,Status,OrderDate);
 		}
 
 		resultSet.close();

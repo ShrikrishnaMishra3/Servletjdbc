@@ -1,18 +1,18 @@
 package com.project.models;
 
-public class kITModels {
+public class kitModels {
 	
 	private int id;
 	private String PersonName;
 	private String Email;
 	private String ContactNumber;
-	public kITModels(int id2, String personName2, String email2, String contactNumber2, String status2, String orderDate2) {
+	public kitModels(int id2, String personName2, String email2, String contactNumber2, String status2, String orderDate2) {
 		
 	}
-	public kITModels(String personName2, String email2, String contactNumber2, String status2, String orderDate2) {
+	public kitModels(String personName2, String email2, String contactNumber2, String status2, String orderDate2) {
 		// TODO Auto-generated constructor stub
 	}
-	public kITModels(int id2) {
+	public kitModels(int id2) {
 		// TODO Auto-generated constructor stub
 	}
 	@Override
