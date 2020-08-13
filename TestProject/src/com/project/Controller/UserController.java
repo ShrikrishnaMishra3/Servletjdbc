@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.project.dao.KitDao;
-import com.project.models.kitModels;
+import com.project.models.KitModels;
 
 public class UserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -63,7 +63,7 @@ public class UserController extends HttpServlet {
 
 	private void listKit(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
-		List<kitModels> listKit = kitDAO.listAllkitModelsinfo();
+		List<KitModels> listKit = kitDAO.listAllkitModelsinfo();
 		request.setAttribute("listKit", listKit);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("KitList.jsp");
 		dispatcher.forward(request, response);
@@ -78,7 +78,7 @@ public class UserController extends HttpServlet {
 	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        kitModels existingKit = kitDAO.getBook(id);
+        KitModels existingKit = kitDAO.getKit(id);
         RequestDispatcher dispatcher = request.getRequestDispatcher("KitForm.jsp");
         request.setAttribute("kit", existingKit);
         dispatcher.forward(request, response);
@@ -94,7 +94,7 @@ public class UserController extends HttpServlet {
 		String OrderDate = request.getParameter("OrderDate");
 		
 
-		kitModels newkit = new kitModels(0,PersonName, Email, ContactNumber,Status,OrderDate);
+		KitModels newkit = new KitModels(0,PersonName, Email, ContactNumber,Status,OrderDate);
 		kitDAO.insertkiT(newkit);
 		response.sendRedirect("list");
 	}
@@ -108,7 +108,7 @@ public class UserController extends HttpServlet {
 		String OrderDate = request.getParameter("OrderDate");
 	
 
-		kitModels kites = new kitModels(id,PersonName, Email, ContactNumber,Status,OrderDate);
+		KitModels kites = new KitModels(id,PersonName, Email, ContactNumber,Status,OrderDate);
 		kitDAO.updateKit(kites);
 		response.sendRedirect("list");
 	}

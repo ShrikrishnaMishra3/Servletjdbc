@@ -1,6 +1,6 @@
 package com.project.models;
 
-public class kitModels {
+public class KitModels {
 	
 	private int id;
 	private String personName;
@@ -12,7 +12,7 @@ public class kitModels {
 	
 	
 	
-	public kitModels(int id, String personName, String email, String contactNumber, String status, String orderDate) {
+	public KitModels(int id, String personName, String email, String contactNumber, String status, String orderDate) {
 		super();
 		this.id = id;
 		this.personName = personName;

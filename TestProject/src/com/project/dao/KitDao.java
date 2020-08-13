@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.project.models.kitModels;
+import com.project.models.KitModels;
 
 public class KitDao {
 
@@ -41,7 +41,7 @@ public class KitDao {
 		}
 	}
 
-	public boolean insertkiT(kitModels kITModels) throws SQLException {
+	public boolean insertkiT(KitModels kITModels) throws SQLException {
 		String sql = "INSERT INTO Kit(PersonName,Email,ContactNumber,Status,OrderDate) VALUES (?,?,?,?,?)";
 		connect();
 
@@ -58,8 +58,8 @@ public class KitDao {
 		return rowInserted;
 	}
 
-	public List<kitModels> listAllkitModelsinfo() throws SQLException {
-		List<kitModels> listkitModels = new ArrayList<>();
+	public List<KitModels> listAllkitModelsinfo() throws SQLException {
+		List<KitModels> listkitModels = new ArrayList<>();
 
 		String sql = "SELECT * FROM Kit";
 
@@ -76,7 +76,7 @@ public class KitDao {
 			String Status = resultSet.getString("Status");
 			String OrderDate = resultSet.getString("OrderDate");
 
-			kitModels Models = new kitModels(id,PersonName,Email,ContactNumber,Status,OrderDate);
+			KitModels Models = new KitModels(id,PersonName,Email,ContactNumber,Status,OrderDate);
 			System.out.println(Models);
 			listkitModels.add(Models);
 		}
@@ -103,7 +103,7 @@ public class KitDao {
 		return rowDeleted;
 	}
 
-	public boolean updateKit(kitModels models) throws SQLException {
+	public boolean updateKit(KitModels models) throws SQLException {
 		String sql = "UPDATE Kit SET PersonName = ? ,Email = ?,ContactNumber = ?,Status=?,OrderDate=?";
 		sql += " WHERE id = ?";
 		connect();
@@ -122,9 +122,9 @@ public class KitDao {
 		return rowUpdated;
 	}
 
-	public kitModels getBook(int id) throws SQLException {
-		kitModels details = null;
-		String sql = "SELECT * FROM book WHERE book_id = ?";
+	public KitModels getKit(int id) throws SQLException {
+		KitModels details = null;
+		String sql = "SELECT * FROM Kit WHERE book_id = ?";
 
 		connect();
 
@@ -140,7 +140,7 @@ public class KitDao {
 			String Status = resultSet.getString("Status");
 			String OrderDate = resultSet.getString("OrderDate");
 
-			details = new kitModels(id,PersonName,Email,ContactNumber,Status,OrderDate);
+			details = new KitModels(id,PersonName,Email,ContactNumber,Status,OrderDate);
 		}
 
 		resultSet.close();

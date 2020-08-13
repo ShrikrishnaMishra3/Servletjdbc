@@ -9,7 +9,7 @@
     <center>
         <h1>ProductMaster Management</h1>
         <h2>
-            <a href="product?action=new">Add New ProductMaster</a>
+            <a href="product?action=newProduct">Add New ProductMaster</a>
             &nbsp;&nbsp;&nbsp;
             <a href="list">List All ProductMaster</a>
              
